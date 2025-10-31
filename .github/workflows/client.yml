@@ -20,8 +20,8 @@ jobs:
           push: false
           file: client.Dockerfile
           build-args: |
-            HOST_DS=http://localhost:8080/,
-            HOST_ST=ws://localhost:8081,
+            HOST_DS=http://localhost:8080
+            HOST_ST=ws://localhost:8081
             MLW=l
           outputs: build
       - name: Build win client
@@ -31,8 +31,8 @@ jobs:
           push: false
           file: client.Dockerfile
           build-args: |
-            HOST_DS=http://localhost:8080/,
-            HOST_ST=ws://localhost:8081,
+            HOST_DS=http://localhost:8080
+            HOST_ST=ws://localhost:8081
             MLW=w
           outputs: build
 
