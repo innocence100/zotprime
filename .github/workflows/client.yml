@@ -13,7 +13,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Build and push
+      - name: Build linux client
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -24,3 +24,25 @@ jobs:
             HOST_ST=ws://localhost:8081,
             MLW=l
           outputs: build
+      - name: Build win client
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          file: client.Dockerfile
+          build-args: |
+            HOST_DS=http://localhost:8080/,
+            HOST_ST=ws://localhost:8081,
+            MLW=w
+          outputs: build
+
+      - name: archive binaries
+        run: cd build/ && ls | xargs zip -r $1.zip $1
+      - name: upload and release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/*.zip
+          tag_name: v0.114.514
+          body: custom build zotero
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
