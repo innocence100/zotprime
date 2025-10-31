@@ -42,7 +42,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: build/*.zip
-          tag_name: v0.114.514
+          tag_name: 0.114.514
           body: custom build zotero
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
