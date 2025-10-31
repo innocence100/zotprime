@@ -37,7 +37,7 @@ jobs:
           outputs: build
 
       - name: archive binaries
-        run: cd build/ && ls | xargs zip -r $1.zip $1
+        run: cd build/ && ls | xargs -I mlw zip -r mlw.zip mlw
       - name: upload and release
         uses: softprops/action-gh-release@v2
         with:
